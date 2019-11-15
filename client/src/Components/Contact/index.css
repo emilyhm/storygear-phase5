@@ -1,0 +1,90 @@
+body {
+    background-color: black;
+    margin: auto;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+p.comment {
+    font-size: 20px;
+    margin: auto;
+    width: 75%;
+} 
+legend#title {
+    color: white;
+    font-family: 'Space Mono', monospace;
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 30px;
+    font-size: 30px
+}
+
+.box {
+    padding: 20px;
+}
+.submit {
+    text-align: center;
+    background-color: white;
+}
+.style-commentbox {
+    display: flex;
+    flex-direction: column;
+}
+.comment {
+    padding: 0px;
+}
+.topic{
+    background-color: white;
+}
+.alert {
+    color: red;
+
+}
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 600px) {
+    .comment {
+        width: 75%;
+    }
+}
+
+
+@media screen and (min-width: 800px) {
+    fieldset {
+        margin: auto;
+        width: 80%;
+    }
+    div.submit{
+        width: 10%;
+        background-color: white;
+        margin: auto;
+    }
+    p.comment {
+        font-size: 35px;
+    }
+    .comments {
+        width: 20px;
+        border: 1px solid red;
+    }
+    .form {
+        width: 80%;
+    }
+    form.comment {
+        display: flex;
+        justify-content: center;
+    }
+    legend#title {
+        font-size: 50px;
+    }
+    
+}
