@@ -19,19 +19,19 @@ class Products extends React.Component {
     const {type, price} = this.state;
     let dataURL = '/api/products';
 
-    // depending on the type or price that the client chooses, it will affect the outcome of the if else statement
-    if (type) {
-      dataURL += `/type/${type}`
-      // above is equivalent to --> dataURL = dataURL + `/type/${type}`
-    } else {
-      dataURL += `/type/all`
-    };
-    //price filter
-    if (price) {
-      dataURL += `/price/${price}`
-    } else {
-      dataURL += `/price/all`
-    };
+    // // depending on the type or price that the client chooses, it will affect the outcome of the if else statement
+    // if (type) {
+    //   dataURL += `/type/${type}`
+    //   // above is equivalent to --> dataURL = dataURL + `/type/${type}`
+    // } else {
+    //   dataURL += `/type/all`
+    // };
+    // //price filter
+    // if (price) {
+    //   dataURL += `/price/${price}`
+    // } else {
+    //   dataURL += `/price/all`
+    // };
 
     // fetches data from database
     fetch(dataURL)

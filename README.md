@@ -7,7 +7,7 @@ These instructions can be used to run the project locally for development and te
 2. Run 'npm install' - This downloads the dependencies that are needed to properly run the website
 2. Run 'npm start' - This starts the Express server, and the React app at the same time
 
-### Prerequisies
+### Dependencies
 No additional instillation should be required. 
 However, a possible list of prerequisites can be found below. Simply ‘cd’ into the respective directories and run ‘npm install --save (prerequisite)’ if the prerequisite needs to be downloaded again.
 

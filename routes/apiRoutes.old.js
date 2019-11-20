@@ -1,38 +1,35 @@
-const router = require("express").Router();
-//.Router helps to breakdown the API routes
+// const router = require("express").Router();
+// //.Router helps to breakdown the API routes
 // const mysql = require('mysql');
-const mongoose = require('mongoose')
-const Product = require('../models/products')
-const Contact = require('../models/contacts')
 
-//DB Connection
-let uri = process.env.ATLAS_URI;
-mongoose.connect(uri, { 
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useUnifiedTopology: true }, 
-    (err) => {
-        console.log(err || 'Connect to MongoDB')
-    })
+// //DB Connection
+// const connection = mysql.createConnection({
+//     host: "localhost",
+//     //db port
+//     port: 3306,
+//     user: "root",
+//     password: process.env.MYPASSWORD,
+//     database: "ecommerce"
+// });
+
+// connection.connect(function(err) {
+//     if (err) throw err;
+//     console.log("connected as id " + connection.threadId);
+//     connection.query("SELECT * FROM products", function(err, data){
+//       console.table(data)  
+//     })  
+//   });
 
 
 
-////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////
 
 
-router.get("/products", (req, res) => {
-    Product.find({}, (err, data) => {
-        if (err) {
-            res.status(500).json(err)
-            return;
-        }
-        console.log(`THIS IS DATA!!!`, data)
-        res.json(data)
-    })
-    // connection.query("SELECT product_name, product_image, product_alt_desc, category, item_description, prices.price FROM products INNER JOIN prices ON products.product_id = prices.product_id", function(err, data){
-    //     res.json(data)
-    // });
-});
+// router.get("/products", (req, res) => {
+//     connection.query("SELECT product_name, product_image, product_alt_desc, category, item_description, prices.price FROM products INNER JOIN prices ON products.product_id = prices.product_id", function(err, data){
+//         res.json(data)
+//     });
+// });
 
 
 
@@ -71,4 +68,4 @@ router.get("/products", (req, res) => {
 
 
 
-module.exports = router;
+// module.exports = router;

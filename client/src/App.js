@@ -6,6 +6,9 @@ import Home from './Components/Home/index';
 import Contact from './Components/Contact/index';
 import Footer from "./Components/Footer/index";
 import Reviews from "./Components/reviews/reviews"
+import LogIn from "./Components/LogIn/index";
+import LogOut from "./Components/LogOut/index";
+import SignUp from "./Components/SignUp/index";
 
 class App extends React.Component {
   render(){
@@ -31,6 +34,7 @@ class App extends React.Component {
             </div> 
           </div>
             <Switch>
+              {/* the first component to render */}
               <Route exact path="/" component={Home}/>
               <Route path="/products" component={Products}/>
               <Route path="/contact-us" component={Contact}/>
