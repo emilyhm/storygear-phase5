@@ -52,7 +52,7 @@ class LogIn extends React.Component {
 
                     <br />
 
-                    <button>Log In</button>
+                    <button type="submit">Log In</button>
 
                 </legend>
             </form>

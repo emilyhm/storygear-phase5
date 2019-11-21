@@ -6,16 +6,18 @@ import './signup.css';
 class SignUp extends React.Component {
     state = {
         fields: { 
-            email: "",
-            username: "",
-            password: ""
+            email: '',
+            username: '',
+            password: ''
         }
     };
 
     // the information is displaying in the input fields
     onInputChange(e) {
+        console.log('hello')
         this.setState({
             fields: {
+                // THIS NAME IS NOT THE SAME AS THE NAME FROM STATE!!!
                 ...this.state.fields, 
                 [e.target.name]: e.target.value
             }
@@ -25,22 +27,25 @@ class SignUp extends React.Component {
     //when you submit the form, the function signup is called and then the user param is passed 
     onFormSubmit(e) {
         e.preventDefault()
+        console.log(this.state.fields)
         httpClient.signUp(this.state.fields)
         .then(user => {
-            console.log('I WORK!!!')
+
             this.setState({ fields: {
-                email: "",
-                username: "",
-                password: ""
+                email: '',
+                username: '',
+                password: ''
                 }
             })
-
+            console.log(user)
             if(user) {
+                console.log('I WORK!!!')
                 this.props.onSignUpSuccess(user)
                 //this takes the user to a different page, mainly the home page
                 this.props.history.push('/products');
             };
-        });
+        })
+        .catch(err => console.log(err))
     };
 
 
@@ -66,7 +71,7 @@ class SignUp extends React.Component {
 
                     Please create a password:
                     <br />
-                    <input type="text" name="password" value={password}/>
+                    <input type="password" name="password" value={password}/>
 
                     <br/>
 

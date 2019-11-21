@@ -1,11 +1,15 @@
-const router = require("express").Router();
+// const router = require("express").Router();
+const express = require('express');
 //.Router helps to breakdown the API routes
-// const mysql = require('mysql');
-const mongoose = require('mongoose')
-const Product = require('../models/products')
-const Contact = require('../models/contacts')
+const mongoose = require('mongoose');
+const usersCtrl = require('../controllers/index');
+const verifyToken = require('../auth').verifyToken;
 
-//DB Connection
+const usersRouter = new express.Router();
+
+const Product = require('../models/products.js')
+
+/////////////////////////////////////////////DB Connection
 let uri = process.env.ATLAS_URI;
 mongoose.connect(uri, { 
     useNewUrlParser: true,
@@ -13,62 +17,42 @@ mongoose.connect(uri, {
     useUnifiedTopology: true }, 
     (err) => {
         console.log(err || 'Connect to MongoDB')
-    })
-
-
-
+    });
 ////////////////////////////////////////////////////
 
+usersRouter.route('/').get(usersCtrl.index)
 
-router.get("/products", (req, res) => {
+usersRouter.route('/').post(usersCtrl.create)
+
+// this is the signin route. It authenticates password
+usersRouter.post('/authenticate', usersCtrl.authenticate)
+
+usersRouter.get("/products", (req, res) => {
     Product.find({}, (err, data) => {
         if (err) {
             res.status(500).json(err)
             return;
         }
-        console.log(`THIS IS DATA!!!`, data)
         res.json(data)
     })
-    // connection.query("SELECT product_name, product_image, product_alt_desc, category, item_description, prices.price FROM products INNER JOIN prices ON products.product_id = prices.product_id", function(err, data){
-    //     res.json(data)
-    // });
 });
 
+// this route serves as the software Firewall ... all routes after this
+// point would need to have a verified token to proceed.
+//protected routes need to be before the firewall
+usersRouter.use(verifyToken)
 
 
-// router.get("/contacts", (req, res) => {
-//     connection.query("SELECT first_name, last_name, email, contact_comment FROM contacts", function(err, data){
-//         res.json(data)
-//     });
-// });
-// ///products/type/:type/price/:price
-// router.get("/products/type/:type/price/:price", (req, res) => {
-//     console.log(req.url)
-//     var query = "SELECT product_name, product_image, product_alt_desc, category, item_description, prices.price FROM products INNER JOIN prices ON products.product_id = prices.product_id WHERE 1"
 
-//     let type = req.params.type
-//     let price = req.params.price
-//     let queryParams = []
-//     //THIS IS SLIGHTLY NOT SECURE- sanatize later
-//     if (type !== "all") {
-//         query = query + ` AND category = ?`;
-//         queryParams.push(type)
-//     };
+usersRouter.route('/:id').get(usersCtrl.show)
+// this is the signup route. It creates a new user
 
-//     if (price !== "all") {
-//         query = query + ` AND monetary_value = ?`
-//         queryParams.push(price)
-//     };
-
-//     connection.query(query, queryParams, function(err, data){
-//         if (err) console.log(err)
-//         // console.log(query)
-//         // console.log(data)
-//         res.json(data)
-//     });
-// });
+usersRouter.route('/:id').patch(usersCtrl.update)
 
 
 
 
-module.exports = router;
+
+
+
+module.exports = usersRouter;
