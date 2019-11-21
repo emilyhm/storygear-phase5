@@ -42,7 +42,7 @@ class SignUp extends React.Component {
                 console.log('I WORK!!!')
                 this.props.onSignUpSuccess(user)
                 //this takes the user to a different page, mainly the home page
-                this.props.history.push('/products');
+                this.props.history.push('/');
             };
         })
         .catch(err => console.log(err))

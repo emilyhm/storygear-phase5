@@ -4,9 +4,11 @@ import { Redirect } from 'react-router-dom';
 
 
 class LogOut extends React.Component {
-    // componentDidMount() {
-    //     this.props.onLogOut()
-    // }
+    //this component fires, where the function is passed down from app.jsx
+
+    componentDidMount() {
+        this.props.onLogOut()
+    }
 
     render() {
         return <Redirect to="/login" />

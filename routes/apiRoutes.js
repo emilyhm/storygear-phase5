@@ -30,9 +30,10 @@ usersRouter.post('/authenticate', usersCtrl.authenticate)
 usersRouter.get("/products", (req, res) => {
     Product.find({}, (err, data) => {
         if (err) {
-            res.status(500).json(err)
+            res.status(500).json("this is an error",err)
             return;
         }
+        console.log("data")
         res.json(data)
     })
 });

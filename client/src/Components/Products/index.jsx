@@ -17,23 +17,10 @@ class Products extends React.Component {
 
   fetchContent() {
     const {type, price} = this.state;
-    let dataURL = '/api/products';
+    //this is the route that you defined on your server side AKA localhost:3001/API/USERS/PRODUCTS
+    let dataURL = '/api/users/products';
 
-    // // depending on the type or price that the client chooses, it will affect the outcome of the if else statement
-    // if (type) {
-    //   dataURL += `/type/${type}`
-    //   // above is equivalent to --> dataURL = dataURL + `/type/${type}`
-    // } else {
-    //   dataURL += `/type/all`
-    // };
-    // //price filter
-    // if (price) {
-    //   dataURL += `/price/${price}`
-    // } else {
-    //   dataURL += `/price/all`
-    // };
-
-    // fetches data from database
+    // fetches data from the server
     fetch(dataURL)
     .then(res => res.json())
     // takes the data and turns it into json
@@ -43,9 +30,9 @@ class Products extends React.Component {
         // sets state to all the items that were brought back
       });
     });
+    console.log(dataURL)
   };
 
-  // finish commenting this one!
   componentDidMount() {
     //how does this work if it isnt using fetchContent?
     const {type, price} = this.props.match.params;
@@ -94,7 +81,7 @@ class Products extends React.Component {
             product_image: image,
             product_alt_desc: alt,
             item_description: description,
-            price,
+            price
           }) => {
             // pass this data through to the ListProducts, where it will be placed in the proper html structure using destructuring
             return <ListProducts 

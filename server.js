@@ -39,7 +39,7 @@ app.use("/api/users", apiRoutes)
 
 // This brings in the React app 
 app.get("*", function(req, res) {
-    res.sendFile(path.join(__dirname, "./client/build/index.html"));
+    res.sendFile(path.join(__dirname, "./client/public/index.html"));
 });
 
 //shows the port that the express server is running on
