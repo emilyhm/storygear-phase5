@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect, Switch, Link } from 'react-router-dom';
 import './App.css';
 import Products from './Components/Products/index';
 import Home from './Components/Home/index';
@@ -9,9 +9,28 @@ import Reviews from "./Components/reviews/reviews"
 import LogIn from "./Components/LogIn/index";
 import LogOut from "./Components/LogOut/index";
 import SignUp from "./Components/SignUp/index";
+import httpClient from './httpClient';
+import NavBar from './NavBar';
 
 class App extends React.Component {
+  //the token is being stored in state
+  state = { currentUser: httpClient.getCurrentUser() }
+
+  //sets the state to the jwt/token
+  onLoginSuccess(user) {
+    this.setState({
+      currentUser: httpClient.getCurrentUser()
+    });
+  };
+
+  //takes the currentuser out of state
+  logOut() {
+    httpClient.logOut()
+    this.setState({ currentUser: null });
+  };
+
   render(){
+    const { currentUser } = this.state
     return (
       <div className="main">
         <Router>
@@ -26,24 +45,54 @@ class App extends React.Component {
               </div>
             </div>
 
-            {/* displays the nav bar */}
-            <div id="nav">
-              <Link id="home" to="/">Home</Link> {' '}
-              <Link id="other-links" to='/products' >Products</Link> {' '}
-              <Link id="other-links" to='/contact-us'>Say Hello!</Link> {' '}
-            </div> 
+            {/* when first pulled up, is the nav bar is shown first */}
+            <NavBar currentUser={ currentUser }/>
+            
           </div>
+          {/* EVERYTHING ELSE IS THE OPTIONS THAT THE USER HAS TO GO WITH DIFFERENT ROUTES LIKE LOGIN OR SIGNUP */}
+
             <Switch>
-              {/* the first component to render */}
-              <Route exact path="/" component={Home}/>
-              <Route path="/products" component={Products}/>
-              <Route path="/contact-us" component={Contact}/>
+
+              <Route path="/login" render={(props) => {
+                return <LogIn {...props}
+                onLoginSuccess={this.onLoginSuccess.bind(this)}/>
+              }}/>
+
+              <Route path="/logout" render={(props) => {
+                return <LogOut onLogOut= {this.logOut.bind(this)}/>
+              }}/>
+
+              {/* the sign up component takes an 'onSignUpSuccess' prop which will perform the same thing as onLoginSuccess: set the state to contain the currentUser */}
+              <Route path="/signup" render = {(props) => {
+                return <SignUp {...props}
+                onSignUpSuccess= {this.onLoginSuccess.bind(this)}/>
+              }}/>
+              
+              <Route path="/products" 
+              render={() => {
+                return currentUser
+                  ? <Products/>
+                  : <Redirect to="/login" />
+              }} />
+
+              <Route path="/contact-us"
+              render={() => {
+                return currentUser
+                  ? <Contact/>
+                  : <Redirect to="/login" />
+              }} />
+            
+              
               <Route path="/reviews" component={Reviews} />
+              
+              
+              {/* second component that shows the home unconditionally */}
+                  <Route exact path="/" component={Home}/>
             </Switch>
         </Router>
 
         {/* footer is displayed on every page */}
-        <Footer/>
+        <Footer />
       </div>
     );
   };

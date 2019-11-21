@@ -30,8 +30,12 @@ if (process.env.NODE_ENV === "production") {
 //////////////  APIs  ////////////////
 //////////////////////////////////////
 
+app.get('/api', (req, res) => {
+    res.json({message: "API root"});
+});
+
 //This brings data from the database
-app.use("/api", apiRoutes)
+app.use("/api/users", apiRoutes)
 
 // This brings in the React app 
 app.get("*", function(req, res) {
