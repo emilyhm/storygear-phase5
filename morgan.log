@@ -698,3 +698,8 @@
 [0mPOST /api/users/authenticate [32m200 [0m82.203 ms - 275[0m
 [0mGET /api/users/products [32m200 [0m0.313 ms - 45[0m
 [0mGET /api/users/products [32m200 [0m69.919 ms - 6396[0m
+[0mGET /api/users/products [36m304 [0m65.537 ms - -[0m
+[0mPOST /api/users/authenticate [32m200 [0m82.070 ms - 275[0m
+[0mGET /api/users/products [36m304 [0m41.155 ms - -[0m
+[0mGET /api/users/products [36m304 [0m36.066 ms - -[0m
+[0mPOST /api/users [32m200 [0m84.526 ms - 294[0m

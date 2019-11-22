@@ -1,10 +1,9 @@
-// const router = require("express").Router();
 const express = require('express');
-//.Router helps to breakdown the API routes
 const mongoose = require('mongoose');
 const usersCtrl = require('../controllers/index');
 const verifyToken = require('../auth').verifyToken;
 
+//usersRouter helps to breakdown the API routes
 const usersRouter = new express.Router();
 
 const Product = require('../models/products.js')
