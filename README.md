@@ -1,5 +1,6 @@
 # Story Gear
 An eCommerce site that sells camera gear. Welcome to Story Gear! Tell us a story. The Story Gear official website is efficient in displaying the products that are offered for the best price.
+Visit the live site! --> https://story-gear.herokuapp.com 
 
 ## Getting Started
 These instructions can be used to run the project locally for development and testing. 
