@@ -25,6 +25,7 @@ httpClient.logIn = function(credentials) {
 	return this({ method: 'post', url: '/api/users/authenticate', data: credentials })
 		.then((serverResponse) => {
 			const token = serverResponse.data.token
+			console.log('LOOKING FOR TOKEN', token)
 			if(token) {
 				// sets token as an included header for all subsequent api requests AKA
 				// this sets the token by putting it in local storage and also the default headers are being set 

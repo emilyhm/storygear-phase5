@@ -33,7 +33,6 @@ usersRouter.get("/products", (req, res) => {
             res.status(500).json("this is an error",err)
             return;
         }
-        console.log("data")
         res.json(data)
     })
 });

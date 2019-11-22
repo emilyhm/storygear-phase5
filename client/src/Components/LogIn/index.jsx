@@ -26,6 +26,7 @@ class LogIn extends React.Component {
                 username: '',
                 password: ''
             }})
+            console.log(user)
 
             if(user) {
                 this.props.onLoginSuccess(user)
@@ -48,7 +49,7 @@ class LogIn extends React.Component {
 
                     Password: 
                     <br />
-                    <input type="text" placeholder="Password" name="password" value={ password } required/>
+                    <input type="password" placeholder="Password" name="password" value={ password } required/>
 
                     <br />
 
